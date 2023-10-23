@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    float movementForce;
+    [SerializeField]
+    Transform cam;
+    Rigidbody rb;
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        // Inputs
+        float forward = Input.GetAxisRaw("Vertical");
+        float side = Input.GetAxisRaw("Horizontal");
+
+        // Camera direction
+        Vector3 camForward = cam.forward;
+        Vector3 camRight = cam.right;
+        camForward.y = 0;
+        camRight.y = 0;
+
+        // Relative Positions
+        Vector3 forwardRelative = camForward * forward;
+        Vector3 rightRelative = camRight * side;
+
+        // Movement
+        Vector3 playerMovement = forwardRelative + rightRelative;
+        rb.AddForce(playerMovement * movementForce, ForceMode.Force);
     }
 }
