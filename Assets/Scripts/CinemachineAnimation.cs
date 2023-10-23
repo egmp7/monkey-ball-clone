@@ -8,8 +8,9 @@ public class CinemachineAnimation : MonoBehaviour
 {
     [SerializeField]
     float dutchValue;
+    [SerializeField]
+    float smoothDutch;
     CinemachineVirtualCamera cinemachineVirtualCamera;
-    // Start is called before the first frame update
 
     private void Awake()
     {
@@ -19,8 +20,9 @@ public class CinemachineAnimation : MonoBehaviour
     void LateUpdate()
     {
         float sideInput = Input.GetAxisRaw("Horizontal");
-        if (sideInput < 0) cinemachineVirtualCamera.m_Lens.Dutch = -dutchValue;
-        else if (sideInput > 0) cinemachineVirtualCamera.m_Lens.Dutch = dutchValue;
-        else cinemachineVirtualCamera.m_Lens.Dutch = 0f;
+        float currentDutch = cinemachineVirtualCamera.m_Lens.Dutch;
+        if (sideInput < 0) cinemachineVirtualCamera.m_Lens.Dutch = Mathf.Lerp(dutchValue,currentDutch,smoothDutch);   
+        else if (sideInput > 0) cinemachineVirtualCamera.m_Lens.Dutch = Mathf.Lerp(-dutchValue,currentDutch,smoothDutch);
+        else cinemachineVirtualCamera.m_Lens.Dutch = Mathf.Lerp(0,currentDutch,smoothDutch);
     }
 }

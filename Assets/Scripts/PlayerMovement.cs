@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float movementForce;
     [SerializeField]
+    float sideSpeed;
+    [SerializeField]
     Transform cam;
     Rigidbody rb;
     void Start()
@@ -28,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Relative Positions
         Vector3 forwardRelative = camForward * forward;
-        Vector3 rightRelative = camRight * side;
+        Vector3 rightRelative = camRight * side * sideSpeed;
 
         // Movement
         Vector3 playerMovement = forwardRelative + rightRelative;
