@@ -147,9 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc36ee6672474a13a5f88e0646df341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementForce: 6
-  sideSpeed: 3
-  cam: {fileID: 2298892079974924463, guid: 417e899509af9fe42937fadd1ecd8d9c, type: 3}
+  forwardMagnitude: 8
+  sideMagnitude: 10
 --- !u!114 &63016469504040210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,5 +161,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2a3a176230a49f6a520dab3c616e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadPosition: 40
-  vcam: {fileID: 0}
