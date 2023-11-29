@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc36ee6672474a13a5f88e0646df341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 2298892079974924463, guid: 417e899509af9fe42937fadd1ecd8d9c, type: 3}
   forwardMagnitude: 6
   sideMagnitude: 10
 --- !u!114 &63016469504040210
