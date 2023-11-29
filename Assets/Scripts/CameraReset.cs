@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -7,20 +5,30 @@ using Cinemachine;
 public class CameraReset : MonoBehaviour
 {
     CinemachineVirtualCamera vcam;
-    Vector3 initPosition;
-    Quaternion initRotation;
+    Vector3 _initPos;
+    Quaternion _initRot;
 
-    private void Awake()
+    private void OnEnable()
+    {
+        EventManager.onPlayerDeath += ResetCamera;
+    }
+    private void OnDisable()
+    {
+        EventManager.onPlayerDeath -= ResetCamera;
+    }
+
+    private void Start()
     {
         vcam = gameObject.GetComponent<CinemachineVirtualCamera>();
-        initPosition = vcam.transform.position;
-        initRotation = vcam.transform.rotation;
+        _initPos = vcam.transform.position;
+        _initRot = vcam.transform.rotation;
     }
 
-    public void ResetCamera()
+    private void ResetCamera()
     {
         vcam.enabled = false;
-        vcam.transform.SetPositionAndRotation(initPosition, initRotation);
+        vcam.transform.SetPositionAndRotation(_initPos, _initRot);
         vcam.enabled = true;
     }
+
 }
