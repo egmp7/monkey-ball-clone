@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    float movementForce;
-    [SerializeField]
-    float sideSpeed;
-    [SerializeField]
-    Transform cam;
-    Rigidbody rb;
+    [SerializeField] float movementForce;
+    [SerializeField] float sideSpeed;
+    [SerializeField] Transform cam;
+    
+    private Rigidbody _rb;
+    
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -34,6 +33,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Movement
         Vector3 playerMovement = forwardRelative + rightRelative;
-        rb.AddForce(playerMovement * movementForce, ForceMode.Force);
+        _rb.AddForce(playerMovement * movementForce, ForceMode.Force);
     }
 }

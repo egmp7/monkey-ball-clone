@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerReset : MonoBehaviour
 {
-    [SerializeField]
-    float deadPosition;
-    [SerializeField]
-    GameObject vcam;
-    Vector3 initPosition;
-    Rigidbody rb;
+    [SerializeField] float deadPosition;
+    [SerializeField] GameObject vcam;
+    
+    private Vector3 _initPos;
+    private Rigidbody _rb;
+
     void Start()
     {
-        initPosition = transform.position;
-        rb = GetComponent<Rigidbody>();
+        _initPos = transform.position;
+        _rb = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
@@ -22,9 +20,9 @@ public class PlayerReset : MonoBehaviour
         {
             // reset player position and velocity
             Vector3 zero = new Vector3(0, 0, 0);
-            rb.velocity = zero;
-            rb.angularVelocity = zero;
-            transform.position = initPosition;
+            _rb.velocity = zero;
+            _rb.angularVelocity = zero;
+            transform.position = _initPos;
 
             // reset camera
             vcam.GetComponent<CameraReset>().ResetCamera();

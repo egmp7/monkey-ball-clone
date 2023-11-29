@@ -8,7 +8,7 @@ public class CollectACollectable : MonoBehaviour
     float speed;
     private void Update()
     {
-        transform.Rotate(0, speed, 0.0f, Space.Self);
+        transform.Rotate(0, speed * Time.deltaTime, 0.0f, Space.Self);
     }
     private void OnTriggerEnter(Collider other)
     {
