@@ -1,31 +1,32 @@
 using UnityEngine;
 
 public class PlayerReset : MonoBehaviour
-{
-    [SerializeField] float deadPosition;
-    [SerializeField] GameObject vcam;
-    
+{   
     private Vector3 _initPos;
+    private Quaternion _initRot;
     private Rigidbody _rb;
 
-    void Start()
+    private void OnEnable()
+    {
+        EventManager.onPlayerDeath += ResetPlayerPosition;
+    }
+    private void OnDisable()
+    {
+        EventManager.onPlayerDeath -= ResetPlayerPosition;
+    }
+
+    private void Start()
     {
         _initPos = transform.position;
+        _initRot = transform.rotation;
         _rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    private void ResetPlayerPosition()
     {
-        if (transform.position.y < -deadPosition)
-        {
-            // reset player position and velocity
-            Vector3 zero = new Vector3(0, 0, 0);
-            _rb.velocity = zero;
-            _rb.angularVelocity = zero;
-            transform.position = _initPos;
-
-            // reset camera
-            vcam.GetComponent<CameraReset>().ResetCamera();
-        }
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        transform.position = _initPos;
+        transform.rotation = _initRot;
     }
 }
